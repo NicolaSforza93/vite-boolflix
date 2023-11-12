@@ -17,6 +17,7 @@ export default {
 
 <template>
     <div class="card-content">
+        <img :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
         <h3>Titolo: {{ item.title }} {{ item.name }}</h3>
         <h4>Titolo originale: {{ item.original_title }} {{ item.original_name }}</h4>
         <p v-if="!flags.includes(item.original_language)">Lingua: {{ item.original_language }}</p>

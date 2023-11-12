@@ -22,6 +22,5 @@ export default {
 <style lang="scss" scoped>
 .card {
     background-color: white;
-    height: 220px;
 }
 </style>
