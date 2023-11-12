@@ -13,7 +13,9 @@ export default {
 
 <template>
     <header>
-        <h1 class="app-logo">Boolflix</h1>
+        <div class="app-logo">
+            <img src="/logo.png" alt="">
+        </div>
         <div class="search-bar">
             <input type="text" v-model="store.searchText">
             <button @click="$emit('search')">Cerca</button>
@@ -31,7 +33,7 @@ header {
     background-color: black;
 
     .app-logo {
-        color: red;
+        width: 125px;
     }
 }
 </style>

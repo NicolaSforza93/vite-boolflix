@@ -1,9 +1,9 @@
 <script>
-import AppCard from './AppCard.vue';
+import GenreList from './GenreList.vue';
 import { store } from '../store';
 
 export default {
-    components: { AppCard },
+    components: { GenreList },
     data() {
         return {
             store
@@ -12,6 +12,9 @@ export default {
     computed: {
         movies: function () {
             return store.movies;
+        },
+        seriesTv: function () {
+            return store.seriesTv;
         }
     }
 }
@@ -20,10 +23,8 @@ export default {
 
 <template>
     <main class="main-content">
-        <section class="movies-section">
-            <div v-for="(movie, id) in movies" :key="id" class="card">
-                <AppCard :item="movie" />
-            </div>
+        <section class="genres">
+            <GenreList :genres="movies.concat(seriesTv)" />
         </section>
     </main>
 </template>
@@ -34,18 +35,13 @@ export default {
 .main-content {
     background-color: $main-color;
     height: 100%;
+    overflow-y: auto;
 }
 
-.movies-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px;
-}
-
-.card {
-    background-color: white;
-    width: 180px;
-    aspect-ratio: 1;
+.genres {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    padding: 30px;
 }
 </style>
