@@ -1,9 +1,9 @@
 <script>
-import GenreList from './GenreList.vue';
+import Categories from './Categories.vue';
 import { store } from '../store';
 
 export default {
-    components: { GenreList },
+    components: { Categories },
     data() {
         return {
             store
@@ -23,9 +23,7 @@ export default {
 
 <template>
     <main class="main-content">
-        <section class="genres">
-            <GenreList :genres="movies.concat(seriesTv)" />
-        </section>
+        <Categories :genres="movies.concat(seriesTv)" />
     </main>
 </template>
 
@@ -36,12 +34,6 @@ export default {
     background-color: $main-color;
     height: 100%;
     overflow-y: auto;
-}
-
-.genres {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
     padding: 30px;
 }
 </style>

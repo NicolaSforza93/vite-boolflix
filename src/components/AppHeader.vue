@@ -17,7 +17,7 @@ export default {
             <img src="/logo.png" alt="">
         </div>
         <div class="search-bar">
-            <input type="text" v-model="store.searchText">
+            <input type="text" v-model.trim="store.searchText">
             <button @click="$emit('search')">Cerca</button>
         </div>
 

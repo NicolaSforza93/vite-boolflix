@@ -38,8 +38,23 @@ export default {
           console.log(seriesTv);
           store.seriesTv = seriesTv;
         })
+    },
+    fetchTrending() {
+      axios.get('https://api.themoviedb.org/3/trending/all/day', {
+        params: {
+          api_key: store.API_KEY,
+        }
+      }).then(res => {
+        // console.log(res.data.results);
+        const trend = res.data.results;
+        console.log(trend);
+        store.trend = trend;
+      })
     }
   },
+  created() {
+    this.fetchTrending();
+  }
 }
 
 
