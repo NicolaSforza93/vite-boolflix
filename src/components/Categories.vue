@@ -21,14 +21,18 @@ export default {
 
 <template>
     <section class="genres-searched">
-        <div v-for="(genre, index) in genres" :key="index" v-show="genres.length > 0" class="card">
+        <p>Risultati per: {{ store.searchText }}</p>
+        <div v-for="(genre, index) in genres" :key="index" class="card">
             <AppCard :item="genre" />
         </div>
     </section>
 
-    <section class="trend">
-        <div v-for="(element, index) in store.trend" :key="index" v-show="!genres.length" class="card">
-            <AppCard :item="element" />
+    <section class="trend" v-if="!genres.length">
+        <h1 class="title">Di tendenza</h1>
+        <div class="trend-item">
+            <div v-for="(element, index) in store.trend" :key="index" class="card">
+                <AppCard :item="element" />
+            </div>
         </div>
     </section>
 </template>
@@ -39,7 +43,7 @@ export default {
 }
 
 .genres-searched,
-.trend {
+.trend-item {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 5px;
