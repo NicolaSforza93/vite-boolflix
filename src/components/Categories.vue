@@ -10,7 +10,7 @@ export default {
         }
     },
     props: {
-        genres: {
+        results: {
             type: Array,
             required: true
         }
@@ -20,16 +20,18 @@ export default {
 </script>
 
 <template>
-    <section class="genres-searched">
-        <p>Risultati per: {{ store.searchText }}</p>
-        <div v-for="(genre, index) in genres" :key="index" class="card">
-            <AppCard :item="genre" />
+    <section>
+        <p v-show="results.length > 0">Risultati per: "{{ store.searchText }}"</p>
+        <div class="search-results">
+            <div v-for="(result, index) in results" :key="index" class="card">
+                <AppCard :item="result" />
+            </div>
         </div>
     </section>
 
-    <section class="trend" v-if="!genres.length">
-        <h1 class="title">Di tendenza</h1>
-        <div class="trend-item">
+    <section v-if="!results.length">
+        <h1 class="title-section">Di tendenza</h1>
+        <div class="trend">
             <div v-for="(element, index) in store.trend" :key="index" class="card">
                 <AppCard :item="element" />
             </div>
@@ -38,14 +40,35 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.card {
-    background-color: white;
+section>p {
+    color: white;
+    margin-bottom: 10px;
 }
 
-.genres-searched,
-.trend-item {
+.title-section {
+    text-transform: uppercase;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.2);
+        transition: all 0.3s;
+        z-index: 999;
+        border: 2px solid white;
+    }
+}
+
+.search-results,
+.trend {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
+    gap: 6px;
 }
 </style>

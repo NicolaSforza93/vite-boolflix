@@ -17,33 +17,68 @@ export default {
 </script>
 
 <template>
-    <div class="card-content">
+    <div class="card_poster">
         <img :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
-        <h3>Titolo: {{ item.title }} {{ item.name }}</h3>
-        <h4>Titolo originale: {{ item.original_title }} {{ item.original_name }}</h4>
-        <p v-if="!flags.includes(item.original_language)">Lingua: {{ item.original_language }}</p>
-        <div class="flags-image" v-else>
-            <span>Lingua:</span>
-            <img :src="`/flags/${item.original_language}.png`" alt="">
+    </div>
+    <div class="card_info">
+        <p><strong>Titolo:</strong> {{ item.title }} {{ item.name }}</p>
+        <p>
+            <strong>Titolo originale:</strong> {{ item.original_title }} {{ item.original_name }}
+        </p>
+        <div class="language">
+            <p><strong>Lingua:</strong></p>
+            <span v-if="!flags.includes(item.original_language)">{{ item.original_language }}</span>
+            <div class="flags-image" v-else>
+                <img :src="`/flags/${item.original_language}.png`" alt="">
+            </div>
         </div>
-        <div>
-            <p>Valutazione:</p>
+        <div class="vote">
+            <p><strong>Voto:</strong></p>
             <div class="stars">
                 <font-awesome-icon icon="fa-solid fa-star" v-for="index in this.stars" :key="index" class="stars_full" />
                 <font-awesome-icon icon="fa-solid fa-star" v-for="index in 5 - this.stars" :key="index"
                     class="stars_empty" />
             </div>
         </div>
+        <p class="overview">{{ item.overview }}</p>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.flags-image {
-    width: 20px;
+.card_info {
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    color: white;
+    font-size: 11px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &:hover {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.736);
+    }
+
+    .vote,
+    .language {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .overview {
+        font-size: 10px;
+    }
 }
 
-.card-content {
-    padding: 5px;
+.flags-image {
+    width: 20px;
 }
 
 .stars_full {
@@ -51,6 +86,6 @@ export default {
 }
 
 .stars_empty {
-    color: black;
+    color: white;
 }
 </style>

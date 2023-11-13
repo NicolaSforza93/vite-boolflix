@@ -23,7 +23,7 @@ export default {
 
 <template>
     <main class="main-content">
-        <Categories :genres="movies.concat(seriesTv)" />
+        <Categories :results="movies.concat(seriesTv)" />
     </main>
 </template>
 
@@ -32,8 +32,6 @@ export default {
 
 .main-content {
     background-color: $main-color;
-    height: 100%;
-    overflow-y: auto;
     padding: 30px;
 }
 </style>
