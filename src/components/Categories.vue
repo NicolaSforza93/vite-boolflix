@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-    <section v-show="results.length > 0">
+    <section v-if="results.length > 0">
         <p>Risultati per: "{{ store.searchText }}"</p>
         <div class="search-results">
             <div v-for="(result, index) in results" :key="index" class="card">
@@ -29,7 +29,7 @@ export default {
         </div>
     </section>
 
-    <section v-if="!results.length">
+    <section v-else>
         <h1 class="title-section">Di tendenza</h1>
         <div class="trend">
             <div v-for="(element, index) in store.trend" :key="index" class="card">
@@ -59,9 +59,9 @@ section>p {
 
     &:hover {
         transform: scale(1.2);
-        transition: all 0.3s;
+        transition: all 0.1s;
         z-index: 999;
-        border: 2px solid white;
+        border: 2px solid red;
     }
 }
 

@@ -2,7 +2,7 @@
 export default {
     data() {
         return {
-            flags: ['de', 'en', 'es', 'fr', 'it'],
+            flags: ['de', 'en', 'es', 'fr', 'it', 'ja'],
         }
     },
     props: {
@@ -28,7 +28,7 @@ export default {
     </figure>
     <div class="card_info">
         <p><strong>Titolo:</strong> {{ item.title || item.name }}</p>
-        <p v-if="item.original_title && item.original_name !== item.title && item.name">
+        <p v-show="item.title !== item.original_title || item.name !== item.original_name">
             <strong>Titolo originale:</strong> {{ item.original_title || item.original_name }}
         </p>
         <div class="language">
@@ -52,14 +52,15 @@ export default {
 <style lang="scss" scoped>
 ::-webkit-scrollbar {
     width: 5px;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: red;
+    background-color: transparent;
 }
 
 .img-placeholder {

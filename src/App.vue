@@ -19,7 +19,8 @@ export default {
       axios.get('https://api.themoviedb.org/3/search/movie', {
         params: {
           api_key: store.API_KEY,
-          query: store.searchText
+          query: store.searchText,
+          language: 'it-IT'
         }
       }).then(res => {
         // console.log(res.data.results);
@@ -30,7 +31,8 @@ export default {
         axios.get('https://api.themoviedb.org/3/search/tv', {
           params: {
             api_key: store.API_KEY,
-            query: store.searchText
+            query: store.searchText,
+            language: 'it-IT'
           }
         }).then(res => {
           // console.log(res.data.results);
@@ -43,6 +45,33 @@ export default {
       axios.get('https://api.themoviedb.org/3/trending/all/day', {
         params: {
           api_key: store.API_KEY,
+          language: 'it-IT'
+        }
+      }).then(res => {
+        // console.log(res.data.results);
+        const trend = res.data.results;
+        console.log(trend);
+        store.trend = trend;
+      })
+    },
+    fetchTrendTvSeries() {
+      axios.get('https://api.themoviedb.org/3/trending/tv/day', {
+        params: {
+          api_key: store.API_KEY,
+          language: 'it-IT'
+        }
+      }).then(res => {
+        // console.log(res.data.results);
+        const trend = res.data.results;
+        console.log(trend);
+        store.trend = trend;
+      })
+    },
+    fetchTrendMovies() {
+      axios.get('https://api.themoviedb.org/3/trending/movie/day', {
+        params: {
+          api_key: store.API_KEY,
+          language: 'it-IT'
         }
       }).then(res => {
         // console.log(res.data.results);
@@ -61,7 +90,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search="performSearch" />
+  <AppHeader @search="performSearch" @home="fetchTrending" @serie="fetchTrendTvSeries" @film="fetchTrendMovies" />
   <AppMain />
 </template>
 

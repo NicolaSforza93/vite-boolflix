@@ -4,9 +4,16 @@ import { store } from '../store';
 export default {
     data() {
         return {
-            store
+            store,
+            show: false
         }
     },
+    methods: {
+        toggleSearch() {
+            this.show = !this.show;
+            store.searchText = '';
+        }
+    }
 }
 
 </script>
@@ -18,15 +25,15 @@ export default {
         </div>
         <div class="navbar">
             <ul class="nav-menu">
-                <li class="nav-item"><a href="#">Home</a></li>
-                <li class="nav-item"><a href="#">Serie Tv</a></li>
-                <li class="nav-item"><a href="#">Film</a></li>
+                <li class="nav-item" @click="$emit('home')"><a href="#">Home</a></li>
+                <li class="nav-item" @click="$emit('serie')"><a href="#">Serie Tv</a></li>
+                <li class="nav-item" @click="$emit('film')"><a href="#">Film</a></li>
             </ul>
         </div>
         <div class="right-side">
             <div class="search-bar">
-                <input type="text" @keyup.enter="$emit('search')" v-model.trim="store.searchText">
-                <font-awesome-icon icon="fa-solid fa-magnifying-glass" @click="$emit('search')" />
+                <input v-if="show" type="text" @keyup.enter="$emit('search')" v-model.trim="store.searchText">
+                <font-awesome-icon icon="fa-solid fa-magnifying-glass" @click="toggleSearch()" />
             </div>
             <font-awesome-icon class="bell" icon="fa-solid fa-bell" />
             <img class="user-avatar" src="/Netflix-avatar.png" alt="">
