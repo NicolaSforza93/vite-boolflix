@@ -3,7 +3,6 @@ export default {
     data() {
         return {
             flags: ['de', 'en', 'es', 'fr', 'it'],
-            stars: Math.ceil(this.item.vote_average / 2)
         }
     },
     props: {
@@ -11,19 +10,26 @@ export default {
             type: Object,
             required: true
         }
+    },
+    computed: {
+        vote() {
+            return Math.ceil(this.item.vote_average / 2);
+        }
     }
 }
 
 </script>
 
 <template>
-    <div class="card_poster">
-        <img :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
-    </div>
+    <figure class="card_poster">
+        <img v-if="item.poster_path" :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
+        <img v-else src="https://placehold.co/800x1200?text=Immagine&font=roboto" alt="Immagine generica"
+            class="img-placeholder">
+    </figure>
     <div class="card_info">
-        <p><strong>Titolo:</strong> {{ item.title }} {{ item.name }}</p>
-        <p>
-            <strong>Titolo originale:</strong> {{ item.original_title }} {{ item.original_name }}
+        <p><strong>Titolo:</strong> {{ item.title || item.name }}</p>
+        <p v-if="item.original_title && item.original_name !== item.title && item.name">
+            <strong>Titolo originale:</strong> {{ item.original_title || item.original_name }}
         </p>
         <div class="language">
             <p><strong>Lingua:</strong></p>
@@ -35,9 +41,8 @@ export default {
         <div class="vote">
             <p><strong>Voto:</strong></p>
             <div class="stars">
-                <font-awesome-icon icon="fa-solid fa-star" v-for="index in this.stars" :key="index" class="stars_full" />
-                <font-awesome-icon icon="fa-solid fa-star" v-for="index in 5 - this.stars" :key="index"
-                    class="stars_empty" />
+                <font-awesome-icon icon="fa-solid fa-star" v-for="n in vote" :key="n" class="stars_full" />
+                <font-awesome-icon icon="fa-solid fa-star" v-for="n in 5 - vote" :key="n" class="stars_empty" />
             </div>
         </div>
         <p class="overview">{{ item.overview }}</p>
@@ -45,6 +50,22 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: red;
+}
+
+.img-placeholder {
+    width: 100%;
+}
+
 .card_info {
     overflow-y: auto;
     position: absolute;

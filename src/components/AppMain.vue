@@ -31,7 +31,7 @@ export default {
 @use '../styles/partials/variables' as *;
 
 .main-content {
-    background-color: $main-color;
+    background-color: $app-color;
     padding: 30px;
 }
 </style>

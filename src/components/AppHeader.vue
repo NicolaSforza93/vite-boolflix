@@ -23,20 +23,27 @@ export default {
                 <li class="nav-item"><a href="#">Film</a></li>
             </ul>
         </div>
-        <div class="search-bar">
-            <input type="text" v-model.trim="store.searchText">
-            <button @click="$emit('search')">Search</button>
+        <div class="right-side">
+            <div class="search-bar">
+                <input type="text" @keyup.enter="$emit('search')" v-model.trim="store.searchText">
+                <font-awesome-icon icon="fa-solid fa-magnifying-glass" @click="$emit('search')" />
+            </div>
+            <font-awesome-icon class="bell" icon="fa-solid fa-bell" />
+            <img class="user-avatar" src="/Netflix-avatar.png" alt="">
+
         </div>
     </header>
 </template>
 
 <style lang="scss" scoped>
+@use '../styles/partials/variables' as *;
+
 header {
     display: flex;
     align-items: center;
     gap: 35px;
-    padding: 10px;
-    background-color: black;
+    padding: 10px 26px;
+    background-color: $app-color;
 
     .app-logo {
         width: 160px;
@@ -61,6 +68,14 @@ header {
     }
 }
 
+.right-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    cursor: pointer;
+}
+
 .search-bar {
     justify-content: end;
     display: flex;
@@ -69,18 +84,13 @@ header {
 
     input {
         align-self: stretch;
-        border: 1px solid white;
+        border: 1px solid red;
         color: white;
         background-color: black;
     }
+}
 
-    button {
-        background-color: red;
-        color: white;
-        padding: 5px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+.user-avatar {
+    width: 25px;
 }
 </style>

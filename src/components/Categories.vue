@@ -20,8 +20,8 @@ export default {
 </script>
 
 <template>
-    <section>
-        <p v-show="results.length > 0">Risultati per: "{{ store.searchText }}"</p>
+    <section v-show="results.length > 0">
+        <p>Risultati per: "{{ store.searchText }}"</p>
         <div class="search-results">
             <div v-for="(result, index) in results" :key="index" class="card">
                 <AppCard :item="result" />
