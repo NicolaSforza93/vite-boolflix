@@ -23,42 +23,42 @@ export default {
         <div class="app-logo">
             <img src="/logo.png" alt="">
         </div>
-        <div class="navbar">
-            <ul class="nav-menu">
+        <div class="navbar flex-grow-1">
+            <ul class="nav-menu mb-0">
                 <li class="nav-item" @click="$emit('home')"><a href="#">Home</a></li>
                 <li class="nav-item" @click="$emit('serie')"><a href="#">Serie Tv</a></li>
                 <li class="nav-item" @click="$emit('film')"><a href="#">Film</a></li>
             </ul>
         </div>
-        <div class="right-side">
+        <div class="right-side d-flex align-items-center gap-3 text-white">
             <div class="search-bar">
                 <input v-if="show" type="text" @keyup.enter="$emit('search')" v-model.trim="store.searchText">
-                <font-awesome-icon icon="fa-solid fa-magnifying-glass" @click="toggleSearch()" />
+                <font-awesome-icon class="search" icon="fa-solid fa-magnifying-glass" @click="toggleSearch()" />
             </div>
-            <font-awesome-icon class="bell" icon="fa-solid fa-bell" />
-            <img class="user-avatar" src="/Netflix-avatar.png" alt="">
-
+            <div class="position-relative">
+                <font-awesome-icon class="bell" icon="fa-solid fa-bell" />
+                <span
+                    class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            </div>
+            <figure class="mb-0">
+                <img class="user-avatar" src="/Netflix-avatar.png" alt="">
+            </figure>
         </div>
     </header>
 </template>
 
 <style lang="scss" scoped>
-@use '../styles/partials/variables' as *;
-
 header {
     display: flex;
     align-items: center;
     gap: 35px;
     padding: 10px 26px;
-    background-color: $app-color;
 
     .app-logo {
         width: 160px;
     }
-}
-
-.navbar {
-    flex-grow: 1;
 }
 
 .nav-menu {
@@ -67,7 +67,7 @@ header {
 
     .nav-item a {
         color: lightgrey;
-        font-size: 15px;
+        font-size: 18px;
 
         &:hover {
             color: white;
@@ -76,10 +76,6 @@ header {
 }
 
 .right-side {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: white;
     cursor: pointer;
 }
 
@@ -97,7 +93,12 @@ header {
     }
 }
 
+.search,
+.bell {
+    font-size: 18px;
+}
+
 .user-avatar {
-    width: 25px;
+    width: 30px;
 }
 </style>

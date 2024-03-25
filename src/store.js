@@ -5,5 +5,6 @@ export const store = reactive({
     searchText: '',
     movies: [],
     seriesTv: [],
-    trend: []
+    trendMovies: [],
+    trendSeries: [],
 });

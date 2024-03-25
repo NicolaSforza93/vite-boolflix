@@ -25,7 +25,7 @@ export default {
       }).then(res => {
         // console.log(res.data.results);
         const movies = res.data.results;
-        console.log(movies);
+        // console.log(movies);
         store.movies = movies;
       }),
         axios.get('https://api.themoviedb.org/3/search/tv', {
@@ -37,22 +37,9 @@ export default {
         }).then(res => {
           // console.log(res.data.results);
           const seriesTv = res.data.results;
-          console.log(seriesTv);
+          // console.log(seriesTv);
           store.seriesTv = seriesTv;
         })
-    },
-    fetchTrending() {
-      axios.get('https://api.themoviedb.org/3/trending/all/day', {
-        params: {
-          api_key: store.API_KEY,
-          language: 'it-IT'
-        }
-      }).then(res => {
-        // console.log(res.data.results);
-        const trend = res.data.results;
-        console.log(trend);
-        store.trend = trend;
-      })
     },
     fetchTrendTvSeries() {
       axios.get('https://api.themoviedb.org/3/trending/tv/day', {
@@ -62,9 +49,9 @@ export default {
         }
       }).then(res => {
         // console.log(res.data.results);
-        const trend = res.data.results;
-        console.log(trend);
-        store.trend = trend;
+        const trendSeries = res.data.results;
+        // console.log(trendSeries);
+        store.trendSeries = trendSeries;
       })
     },
     fetchTrendMovies() {
@@ -75,14 +62,15 @@ export default {
         }
       }).then(res => {
         // console.log(res.data.results);
-        const trend = res.data.results;
-        console.log(trend);
-        store.trend = trend;
+        const trendMovies = res.data.results;
+        console.log(trendMovies);
+        store.trendMovies = trendMovies;
       })
-    }
+    },
   },
   created() {
-    this.fetchTrending();
+    this.fetchTrendMovies();
+    this.fetchTrendTvSeries();
   }
 }
 
@@ -90,7 +78,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search="performSearch" @home="fetchTrending" @serie="fetchTrendTvSeries" @film="fetchTrendMovies" />
+  <AppHeader @search="performSearch" @serie="fetchTrendTvSeries" @film="fetchTrendMovies" />
   <AppMain />
 </template>
 

@@ -21,12 +21,15 @@ export default {
 </script>
 
 <template>
-    <figure class="card_poster">
-        <img v-if="item.poster_path" :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
-        <img v-else src="https://placehold.co/800x1200?text=Immagine&font=roboto" alt="Immagine generica"
-            class="img-placeholder">
-    </figure>
-    <div class="card_info">
+    <div class="card" @click="$emit('show', item)">
+        <figure class="card_poster mb-0">
+            <img v-if="item.poster_path" :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt=""
+                class="img-fluid">
+            <img v-else src="https://placehold.co/800x1200?text=Immagine&font=roboto" alt="Immagine generica"
+                class="img-placeholder img-fluid">
+        </figure>
+        <slot></slot>
+        <!-- <div class="card_info">
         <p><strong>Titolo:</strong> {{ item.title || item.name }}</p>
         <p v-show="item.title !== item.original_title || item.name !== item.original_name">
             <strong>Titolo originale:</strong> {{ item.original_title || item.original_name }}
@@ -46,6 +49,7 @@ export default {
             </div>
         </div>
         <p class="overview">{{ item.overview }}</p>
+    </div> -->
     </div>
 </template>
 
@@ -63,8 +67,19 @@ export default {
     background-color: transparent;
 }
 
-.img-placeholder {
-    width: 100%;
+.card {
+    border-radius: 0;
+    height: 100%;
+    user-select: none;
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+        transition: all 0.1s;
+        border: 2px solid red;
+    }
 }
 
 .card_info {
@@ -82,10 +97,10 @@ export default {
     flex-direction: column;
     gap: 8px;
 
-    &:hover {
-        opacity: 1;
-        background-color: rgba(0, 0, 0, 0.736);
-    }
+    // &:hover {
+    //     opacity: 1;
+    //     background-color: rgba(0, 0, 0, 0.736);
+    // }
 
     .vote,
     .language {
@@ -97,17 +112,13 @@ export default {
     .overview {
         font-size: 10px;
     }
-}
 
-.flags-image {
-    width: 20px;
-}
+    .stars_full {
+        color: gold;
+    }
 
-.stars_full {
-    color: gold;
-}
-
-.stars_empty {
-    color: white;
+    .stars_empty {
+        color: white;
+    }
 }
 </style>
