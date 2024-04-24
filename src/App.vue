@@ -25,6 +25,9 @@ export default {
       }).then(res => {
         // console.log(res.data.results);
         const movies = res.data.results;
+        movies.forEach(movie => {
+          movie.media_type = 'movie'
+        });
         // console.log(movies);
         store.movies = movies;
       }),
@@ -37,6 +40,9 @@ export default {
         }).then(res => {
           // console.log(res.data.results);
           const seriesTv = res.data.results;
+          seriesTv.forEach(serieTv => {
+            serieTv.media_type = 'tv'
+          });
           // console.log(seriesTv);
           store.seriesTv = seriesTv;
         })
@@ -63,7 +69,7 @@ export default {
       }).then(res => {
         // console.log(res.data.results);
         const trendMovies = res.data.results;
-        console.log(trendMovies);
+        // console.log(trendMovies);
         store.trendMovies = trendMovies;
       })
     },
@@ -78,6 +84,12 @@ export default {
 </script>
 
 <template>
+  <video controls v-if="store.movies.length === 0">
+    <source src="/Y2meta.app-Rebel Moon - Parte 2_ La Sfregiatrice _ Trailer ufficiale _ Netflix Italia-(1080p).mp4"
+      type="video/mp4">
+    <!-- Messaggio di fallback se il browser non supporta il tag video -->
+    Your browser does not support the video tag.
+  </video>
   <AppHeader @search="performSearch" @serie="fetchTrendTvSeries" @film="fetchTrendMovies" />
   <AppMain />
 </template>
@@ -85,4 +97,8 @@ export default {
 <style lang="scss">
 @use './styles/general.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+video {
+  width: 100%;
+}
 </style>

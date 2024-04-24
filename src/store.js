@@ -7,4 +7,5 @@ export const store = reactive({
     seriesTv: [],
     trendMovies: [],
     trendSeries: [],
+    flags: ['de', 'en', 'es', 'fr', 'it', 'ja'],
 });

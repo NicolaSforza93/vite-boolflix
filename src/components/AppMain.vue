@@ -33,5 +33,6 @@ export default {
 .main-content {
     background-color: $app-color;
     padding: 8px 20px;
+    position: relative;
 }
 </style>
